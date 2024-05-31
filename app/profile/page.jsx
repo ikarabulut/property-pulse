@@ -6,6 +6,8 @@ import Spinner from "@/components/Spinner";
 import Image from "next/image";
 import Link from "next/link";
 
+import { toast } from "react-toastify";
+
 import { useSession } from "next-auth/react";
 import profileDefault from "../../assets/images/profile.png";
 
@@ -59,11 +61,12 @@ const ProfilePage = () => {
           (property) => property._id !== propertyId
         );
         setProperties(updatedProperties);
+        toast.success("Property deleted");
       } else {
-        alert("Failed to delete property");
+        toast.error("Failed to delete property");
       }
     } catch (error) {
-      alert("Failed to delete property");
+      toast.error("Failed to delete property");
       console.error(error);
     }
   };
