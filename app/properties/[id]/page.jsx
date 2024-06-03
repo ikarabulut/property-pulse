@@ -151,8 +151,8 @@ const PropertyPage = () => {
                 </aside>
               </div>
             </div>
+            <PropertyImages images={property.images} />
           </section>
-          <PropertyImages images={property.images} />
         </>
       )}
     </>
