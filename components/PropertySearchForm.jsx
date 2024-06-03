@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 const PropertySearchForm = () => {
   const router = useRouter();
 
-  const [searchCriteria, setSearchCriteria] = useState("");
+  const [location, setLocation] = useState("");
   const [propertyType, setPropertyType] = useState("All");
 
   const handleSubmit = (e) => {
@@ -14,7 +14,7 @@ const PropertySearchForm = () => {
     if (location === "" && propertyType === "All") {
       router.push("/properties");
     } else {
-      const query = `?searchCriteria=${searchCriteria}&propertyType=${propertyType}`;
+      const query = `?location=${location}&propertyType=${propertyType}`;
       router.push(`/properties/search-results${query}`);
     }
   };
@@ -33,8 +33,8 @@ const PropertySearchForm = () => {
           id="location"
           placeholder="Enter keywords or location"
           className="w-full px-4 py-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring focus:ring-blue-500"
-          value={searchCriteria}
-          onChange={(e) => setSearchCriteria(e.target.value)}
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
         />
       </div>
       <div className="w-full md:w-2/5 md:pl-2">
