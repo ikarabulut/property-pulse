@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useEffect, useState } from "react";
-
+import "mapbox-gl/dist/mapbox-gl.css";
 import Map, { Marker } from "react-map-gl";
 import { setDefaults, fromAddress } from "react-geocode";
 import Spinner from "./Spinner";
@@ -35,7 +35,7 @@ const PropertyMap = ({ property }) => {
         );
 
         if (res.results.length === 0) {
-          setGeocodingError(true);
+          setGeocodeError(true);
           setLoading(false);
           return;
         }
