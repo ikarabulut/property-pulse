@@ -1,10 +1,8 @@
 "use client";
 import { useState } from "react";
-import { useSession } from "next-auth/react";
-
 import { FaPaperPlane } from "react-icons/fa";
-
 import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 
 const PropertyContactForm = ({ property }) => {
   const { data: session } = useSession();
@@ -25,6 +23,7 @@ const PropertyContactForm = ({ property }) => {
       recipient: property.owner,
       property: property._id,
     };
+
     try {
       const res = await fetch("/api/messages", {
         method: "POST",
@@ -33,10 +32,11 @@ const PropertyContactForm = ({ property }) => {
         },
         body: JSON.stringify(data),
       });
+
       if (res.status === 200) {
         toast.success("Message sent successfully");
         setWasSubmitted(true);
-      } else if (res.status === 401 || res.status === 400) {
+      } else if (res.status === 400 || res.status === 401) {
         const dataObj = await res.json();
         toast.error(dataObj.message);
       } else {
@@ -134,8 +134,7 @@ const PropertyContactForm = ({ property }) => {
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline flex items-center justify-center"
               type="submit"
             >
-              <FaPaperPlane className="mr-2" />
-              Send Message
+              <FaPaperPlane className="mr-2" /> Send Message
             </button>
           </div>
         </form>
@@ -143,5 +142,4 @@ const PropertyContactForm = ({ property }) => {
     </div>
   );
 };
-
 export default PropertyContactForm;
